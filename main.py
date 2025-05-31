@@ -31,7 +31,7 @@ st.set_page_config(
 # Sidebar for settings and info
 with st.sidebar:
     st.header("AI Writer About")
-    st.markdown("**Model**: DeepSeek Chat (Free)")
+    st.markdown("**Model**: DeepSeek Chat ")
     st.markdown("**API**: OpenRouter")
     st.markdown("---")
     st.info("Enter your prompt below to generate essays, stories, poems, emails, or letters. For support, contact the developer.")
