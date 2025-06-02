@@ -10,6 +10,11 @@ load_dotenv()
 # Get API key
 OPEN_ROUTER_API_KEY = os.getenv("OPEN_ROUTER_API_KEY")
 
+# Check if API key is set
+if not OPEN_ROUTER_API_KEY:
+    st.error("OPEN_ROUTER_API_KEY environment variable is not set. Please configure it in your deployment platform's settings or in a .env file for local testing.")
+    st.stop()
+
 # Initialize OpenAI client
 try:
     client = OpenAI(
@@ -36,7 +41,7 @@ with st.sidebar:
     st.markdown("---")
     st.info("Enter your prompt below to generate essays, stories, poems, emails, or letters. For support, contact the developer.")
     # Footer
-    st.markdown('<div style="text-align: center; color: white; margin-top: 2em;">Made with ❤️ by  Abdul Uzair</div>', unsafe_allow_html=True)    
+    st.markdown('<div style="text-align: center; color: white; margin-top: 2em;">Made with ❤️ by Abdul Uzair</div>', unsafe_allow_html=True)    
 
 # Main UI
 st.title("Writer AI Chatbot 🤖")
@@ -47,7 +52,6 @@ st.markdown(
     Type your request below, and I'll generate a response tailored to your needs.
     """
 )
-
 
 # Initialize chat history
 if "messages" not in st.session_state:
@@ -71,7 +75,7 @@ if prompt:
     with st.spinner("Generating your content..."):
         try:
             response = client.chat.completions.create(
-                model="deepseek/deepseek-chat",  # Updated to a valid OpenRouter model
+                model="deepseek/deepseek-chat",  # Valid OpenRouter model
                 messages=[
                     {
                         "role": "system",
@@ -100,4 +104,3 @@ if prompt:
         with st.chat_message("assistant", avatar="🤖"):
             # Display the generated content
             st.markdown(output)
-
